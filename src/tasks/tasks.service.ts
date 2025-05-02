@@ -15,7 +15,9 @@ export class TasksService {
       age: 48
     }
   }
-  createTask() {
+  createTask(task: any) {
+    console.log(task);
+    
     return 'Creando tareas';
   }
   updeteTask() {
