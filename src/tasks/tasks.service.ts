@@ -1,12 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { error } from 'console';
 import { find } from 'rxjs';
+import { UpdateTaskDto } from './dto/update-task.dto';
+import { createTaskDto } from './dto/create-task.dto';
 
-export interface User{
+export interface User {
   name: string;
   age: number;
 }
-
 
 @Injectable()
 export class TasksService {
@@ -17,16 +18,15 @@ export class TasksService {
   }
 
   getTask(id: number) {
-    const taskFound =  this.tasks.find(task => task.id === id)
-    
+    const taskFound = this.tasks.find((task) => task.id === id);
+
     if (!taskFound) {
-      return new NotFoundException (` Task with id ${id} not found`)
+      return new NotFoundException(` Task with id ${id} not found`);
     }
-    return taskFound
-    
+    return taskFound;
   }
 
-  createTask(task: any) {
+  createTask(task: createTaskDto) {
     console.log(task);
     this.tasks.push({
       ...task,
@@ -34,7 +34,9 @@ export class TasksService {
     });
     return task;
   }
-  updeteTask() {
+  updeteTask(task: UpdateTaskDto) {
+    console.log(task);
+    
     return 'actualizando tarea';
   }
   deleteTask() {
